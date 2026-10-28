@@ -31,7 +31,7 @@ def process_video(data: VideoRequest):
         r = requests.get(data.video_url, timeout=120)
         r.raise_for_status()
 
-        with open("input_video", "wb") as f:
+with open("input_video", "wb") as f:
     for chunk in r.iter_content(chunk_size=1024 * 1024):
         if chunk:
             f.write(chunk)
