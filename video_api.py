@@ -30,12 +30,12 @@ def process_video(data: VideoRequest):
     try:
         r = requests.get(data.video_url, timeout=120)
         r.raise_for_status()
-
-with open("input_video", "wb") as f:
-    for chunk in r.iter_content(chunk_size=1024 * 1024):
-        if chunk:
-            f.write(chunk)
-
+       
+        with open("input_video", "wb") as f:
+            for chunk in r.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    f.write(chunk)
+      
         subprocess.run([
             "ffmpeg", "-y", "-i", "input_video",
             "-t", "35",
