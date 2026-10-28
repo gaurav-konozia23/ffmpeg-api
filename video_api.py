@@ -31,13 +31,13 @@ def process_video(data: VideoRequest):
         r = requests.get(data.video_url, timeout=120)
         r.raise_for_status()
        
-        with open("input_video", "wb") as f:
+        with open("input_video.mp4", "wb") as f:
             for chunk in r.iter_content(chunk_size=1024 * 1024):
                 if chunk:
                     f.write(chunk)
       
         subprocess.run([
-            "ffmpeg", "-y", "-i", "input_video",
+            "ffmpeg", "-y", "-i", "input_video.mp4",
             "-t", "35",
             "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920",
             "-c:v", "libx264", "-c:a", "aac",
